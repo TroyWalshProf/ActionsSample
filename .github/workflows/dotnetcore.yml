@@ -58,7 +58,7 @@ jobs:
       - name: download tests
         uses: actions/download-artifact@v1
         with:
-          name: artifactTests
+          name: tests
           path: artifactTests
       
       - name: Setup .NET Core
