@@ -13,6 +13,7 @@ jobs:
 
     steps:
     - run: mkdir -p artifact
+    - run: mkdir -p artifact/test
       
     - uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -20,7 +21,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Build with dotnet
-      run: dotnet test WebApp/TestSite.sln /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:configuration="Release" /p:DesktopBuildPackageLocation="artifact/package.zip"
+      run: dotnet build WebApp/TestSite.sln /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:configuration="Release" /p:DesktopBuildPackageLocation="artifact/package.zip"
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
