@@ -21,7 +21,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Build with dotnet
-      run: dotnet build WebApp/TestSite.sln /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:configuration="Release" /p:DesktopBuildPackageLocation="artifact/package.zip"
+      run: dotnet build WebApp/TestSite.sln /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:configuration="Release" /p:DesktopBuildPackageLocation="${{github.workspace}}/artifact/package.zip"
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
