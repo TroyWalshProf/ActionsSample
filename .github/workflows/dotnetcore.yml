@@ -12,17 +12,16 @@ jobs:
 
     steps:
     - run: mkdir -p artifactApp
-    - run: mkdir -p artifactApp2
     - run: mkdir -p artifactTests
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Build and test app with dotnet
-      run: dotnet test WebApp/TestSite.sln /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:configuration="Release" /p:DesktopBuildPackageLocation="${{github.workspace}}/artifactApp/package.zip"
-    - name: Publish com o utilitario dotnet
-      run: dotnet publish WebApp/TestSite.sln -c Release -o ${{github.workspace}}/artifactApp2
+    - name: test app with dotnet
+      run: dotnet test WebApp/TestSite.sln #/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:configuration="Release" /p:DesktopBuildPackageLocation="${{github.workspace}}/artifactApp/package.zip"
+    - name: Publish app with dotnet
+      run: dotnet publish WebApp/TestSite.sln -c Release -o ${{github.workspace}}/artifactApp
     - name: Build automated tests with dotnet
       run: dotnet build TestAutomation/DemoTests.sln -o "${{github.workspace}}/artifactTests"
     - name: Upload app artifact
@@ -30,12 +29,6 @@ jobs:
       with:
         name: app
         path: artifactApp
-        
-    - name: Upload app artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: app2
-        path: artifactApp2
     - name: Upload test artifact
       uses: actions/upload-artifact@v1.0.0
       with:
@@ -49,7 +42,7 @@ jobs:
       - name: download app
         uses: actions/download-artifact@v1
         with:
-          name: app2
+          name: app
           path: artifactApp
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
@@ -57,3 +50,20 @@ jobs:
           app-name: "TTWDevOpsLower"
           publish-profile: ${{ secrets.LowerPubProfile  }} 
           package: 'artifactApp'
+          
+  testDev:
+    needs: deployDev
+    runs-on: windows-latest
+    steps:
+      - name: download tests
+        uses: actions/download-artifact@v1
+        with:
+          name: artifactTests
+          path: artifactTests
+      
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.101
+      - name: run tests
+        run: dotnet vstest artifactTests/test.dll
