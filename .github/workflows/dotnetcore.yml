@@ -23,7 +23,7 @@ jobs:
     - name: Build and test app with dotnet
       run: dotnet test WebApp/TestSite.sln /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:configuration="Release" /p:DesktopBuildPackageLocation="${{github.workspace}}/artifactApp/package.zip"
     - name: Build and test test with dotnet
-      run: dotnet build /TestAutomation/DemoTests.sln -o "${{github.workspace}}/artifactTests"
+      run: dotnet build TestAutomation/DemoTests.sln -o "${{github.workspace}}/artifactTests"
     - name: Upload app artifact
       uses: actions/upload-artifact@v1.0.0
       with:
