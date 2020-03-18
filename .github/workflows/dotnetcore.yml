@@ -8,13 +8,11 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
     - run: mkdir -p artifactApp
     - run: mkdir -p artifactTests
-      
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -34,3 +32,18 @@ jobs:
       with:
         name: tests
         path: artifactTests
+
+  deployDev:
+    runs-on: windows-latest
+    steps:
+      - name: download app
+        uses: actions/download-artifact@v1
+        with:
+          name: app
+          path: artifactApp
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
+        uses: azure/webapps-deploy@v2
+        with: 
+          app-name: "TTWDevOpsLower"
+          publish-profile: ${{ secrets.LowerPubProfile  }} 
+          package: 'artifactApp/package.zip'
