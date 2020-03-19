@@ -68,7 +68,7 @@ jobs:
           dotnet-version: 3.1.101
       - name: run tests
         shell: cmd
-        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Smoke --Settings:artifactTests\Parallel.RunSettings --ResultsDirectory:testResults  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome"  TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:WebSiteBase')]/@value="https://ttwdevopslowerr.azurewebsites.net"
+        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Smoke /logger:"trx;LogFileName=artifactTests\logs\results.trx" --Settings:artifactTests\Parallel.RunSettings --ResultsDirectory:testResults  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome"  TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:WebSiteBase')]/@value="https://ttwdevopslowerr.azurewebsites.net"
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v1.0.0
