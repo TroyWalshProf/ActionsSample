@@ -54,8 +54,6 @@ jobs:
   testInLower:
     needs: deployToLower
     runs-on: windows-latest
-    env:
-      baseUrl: https://ttwdevopslower.azurewebsites.net
     steps:
       - name: download tests
         uses: actions/download-artifact@v1
@@ -69,7 +67,7 @@ jobs:
           dotnet-version: 3.1.101
       - name: run tests
         shell: cmd
-        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Smoke --Settings:artifactTests\Parallel.RunSettings  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome"  TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:WebSiteBase')]/@value="$baseUrl"
+        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Smoke --Settings:artifactTests\Parallel.RunSettings  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome"  TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:WebSiteBase')]/@value="https://ttwdevopslower.azurewebsites.net"
 
   deployToHigher:
     needs: testInLower
@@ -90,8 +88,6 @@ jobs:
   testInHigher:
     needs: deployToHigher
     runs-on: windows-latest
-    env:
-      baseUrl: https://ttwdevopshigher.azurewebsites.net
     steps:
       - name: download tests
         uses: actions/download-artifact@v1
@@ -105,4 +101,4 @@ jobs:
           dotnet-version: 3.1.101
       - name: run tests
         shell: cmd
-        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Regression --Settings:artifactTests\Parallel.RunSettings  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome"  TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:WebSiteBase')]/@value="$baseUrl"
+        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Regression --Settings:artifactTests\Parallel.RunSettings  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome"  TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:WebSiteBase')]/@value="https://ttwdevopshigher.azurewebsites.net"
