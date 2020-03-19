@@ -66,4 +66,4 @@ jobs:
         with:
           dotnet-version: 3.1.101
       - name: run tests
-        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Smoke --Settings:artifactTests\Parallel.RunSettings
+        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Smoke --Settings:artifactTests\Parallel.RunSettings  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome" 
