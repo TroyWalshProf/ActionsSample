@@ -1,3 +1,5 @@
+![CI/CD/CT](https://github.com/TroyWalshProf/ActionsSample/workflows/.NET%20Core/badge.svg?branch=master)
+
 #Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
