@@ -55,6 +55,7 @@ jobs:
     needs: deployToLower
     runs-on: windows-latest
     steps:
+      - run: mkdir -p testResults
       - name: download tests
         uses: actions/download-artifact@v1
         with:
@@ -67,8 +68,13 @@ jobs:
           dotnet-version: 3.1.101
       - name: run tests
         shell: cmd
-        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Smoke --Settings:artifactTests\Parallel.RunSettings  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome"  TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:WebSiteBase')]/@value="https://ttwdevopslower.azurewebsites.net"
-
+        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Smoke --Settings:artifactTests\Parallel.RunSettings --ResultsDirectory:testResults  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome"  TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:WebSiteBase')]/@value="https://ttwdevopslowerr.azurewebsites.net"
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: lowerTestResults
+          path: testResults
   deployToHigher:
     needs: testInLower
     runs-on: windows-latest
