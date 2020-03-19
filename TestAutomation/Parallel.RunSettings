@@ -12,5 +12,6 @@
   </MSTest>
   <TestRunParameters>
     <Parameter name="SeleniumMaqs:Browser" value="Remote" />
+    <Parameter name="SeleniumMaqs:WebSiteBase" value="" />
   </TestRunParameters>  
 </RunSettings>
