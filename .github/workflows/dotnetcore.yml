@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
     - run: mkdir -p artifactApp
     - run: mkdir -p artifactTests
@@ -36,6 +35,7 @@ jobs:
         path: artifactTests
 
   deployToLower:
+    if: github.ref == 'refs/heads/master'
     needs: build
     runs-on: windows-latest
     steps:
@@ -106,4 +106,3 @@ jobs:
       - name: run tests
         shell: cmd
         run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Regression --Settings:artifactTests\Parallel.RunSettings  -- TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:Browser')]/@value="Chrome"  TestRunParameters/Parameter[contains(@name,'SeleniumMaqs:WebSiteBase')]/@value="$baseUrl"
-
