@@ -37,11 +37,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\..\ParallelLower.RunSettings">
-      <Link>Parallel.RunSettings</Link>
+      <Link>ParallelLower.RunSettings</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\..\ParallelHigher.RunSettings">
-      <Link>Parallel.RunSettings</Link>
+      <Link>ParallelHigher.RunSettings</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
