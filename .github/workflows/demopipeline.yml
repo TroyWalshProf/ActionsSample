@@ -74,8 +74,7 @@ jobs:
         with:
           files: artifactTests\Parallel.RunSettings
         env:
-          ['SeleniumMaqs:Browser']: "Chrome"
-          ['SeleniumMaqs:WebSiteBase']: "https://ttwdevopshigher.azurewebsites.net"
+          client[0].api_key[0].current_key: "test"
 
       - name: VSTest
         run: vstest.console.exe artifactTests\tests.dll --TestCaseFilter:TestCategory=Regression /logger:"trx;LogFileName=${{github.workspace}}/artifactTests/logs/results.trx" --Settings:artifactTests\Parallel.RunSettings 
