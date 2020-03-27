@@ -67,8 +67,14 @@ jobs:
           dotnet-version: 3.1.101
 
       - name: Setup VSTest Path
-        uses: darenm/Setup-VSTest@v1
-
+        uses: darenm/Setup-VSTest@v1 
+      - name: Update test config
+        uses: microsoft/variable-substitution@v1 
+        with:
+          files: '**/Parallel.RunSettings'
+        env:
+          ['SeleniumMaqs:Browser']: "Chrome"
+          ['SeleniumMaqs:WebSiteBase']: "https://ttwdevopshigher.azurewebsites.net"
       - name: VSTest
         run: vstest.console.exe artifactTests\tests.dll --TestCaseFilter:TestCategory=Regression /logger:"trx;LogFileName=${{github.workspace}}/artifactTests/logs/results.trx" --Settings:artifactTests\Parallel.RunSettings 
         
