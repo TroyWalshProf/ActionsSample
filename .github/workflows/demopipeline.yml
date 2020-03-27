@@ -72,7 +72,7 @@ jobs:
       - name: Update test config
         uses: microsoft/variable-substitution@v1 
         with:
-          files: 'artifactTests\Parallel.RunSettings'
+          files: './artifactTests/Parallel.RunSettings'
         env:
           ['SeleniumMaqs:Browser']: "Chrome"
           ['SeleniumMaqs:WebSiteBase']: "https://ttwdevopshigher.azurewebsites.net"
