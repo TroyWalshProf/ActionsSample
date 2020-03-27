@@ -67,7 +67,7 @@ jobs:
           dotnet-version: 3.1.101
       - name: run tests
         shell: cmd
-        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Regression /logger:"trx;LogFileName=${{github.workspace}}/artifactTests/logs/results.trx" --Settings:artifactTests\Parallel.RunSettings  -- TestRunParameters.Parameter(name="Browser",value="Chrome") #TestRunParameters.Parameter(name="SeleniumMaqs:WebSiteBase", value="https://ttwdevopshigher.azurewebsites.net")
+        run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Regression /logger:"trx;LogFileName=${{github.workspace}}/artifactTests/logs/results.trx" --Settings:artifactTests\Parallel.RunSettings  -- TestRunParameters.Parameter(name=\"Browser\",value=\"Chrome\") #TestRunParameters.Parameter(name="SeleniumMaqs:WebSiteBase", value="https://ttwdevopshigher.azurewebsites.net")
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v1.0.0
