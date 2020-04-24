@@ -5,7 +5,7 @@ using TestSite.Controllers;
 namespace UnitTests
 {
     [TestClass]
-    public class UnitTesting
+    public class UnitTesting 
     {
         [TestMethod]
         public void AboutMessage()
