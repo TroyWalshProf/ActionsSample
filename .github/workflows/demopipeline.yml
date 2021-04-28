@@ -45,6 +45,7 @@ jobs:
   deployToLower:
     if: github.ref == 'refs/heads/master'
     needs: build
+    environment: lower
     runs-on: windows-latest
     steps:
       - name: download app
