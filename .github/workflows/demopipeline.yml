@@ -99,6 +99,7 @@ jobs:
   deployToHigher:
     needs: testInLower
     runs-on: windows-latest
+    environment: higher
     steps:
       - name: download app
         uses: actions/download-artifact@v1
