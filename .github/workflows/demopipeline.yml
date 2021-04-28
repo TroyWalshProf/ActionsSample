@@ -77,6 +77,10 @@ jobs:
 
       - name: Setup VSTest Path
         uses: darenm/Setup-VSTest@v1 
+        
+      - name: Updated Chrome
+        run: |
+          choco install googlechrome -y
 
      # - name: VSTest
       #  run: vstest.console.exe artifactTests\tests.dll --TestCaseFilter:TestCategory=Regression /logger:"trx;LogFileName=${{github.workspace}}/artifactTests/logs/results.trx" --Settings:artifactTests\Parallel.RunSettings 
@@ -122,6 +126,11 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.101
+        
+      - name: Updated Chrome
+        run: |
+          choco install googlechrome -y
+          
       - name: run tests
         shell: cmd
         run: dotnet vstest artifactTests\tests.dll --TestCaseFilter:TestCategory=Regression /logger:"trx;LogFileName=${{github.workspace}}/artifactTests/logs/results.trx" --Settings:artifactTests\ParallelHigher.RunSettings  
