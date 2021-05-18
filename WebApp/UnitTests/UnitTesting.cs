@@ -20,7 +20,7 @@ namespace UnitTests
         {
             HomeController controller = new HomeController(null);
             ViewResult view = (ViewResult)controller.Contact();
-            Assert.AreEqual("Magenicz", view.ViewData["Message"]);
+            Assert.AreEqual("Mageniczz", view.ViewData["Message"]);
         }
 
         [TestMethod]
