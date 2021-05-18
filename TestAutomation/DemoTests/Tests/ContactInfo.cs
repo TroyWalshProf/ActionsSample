@@ -21,7 +21,7 @@ namespace Tests
 
             Contact contact = home.OpenContactTab();
 
-            this.SoftAssert.Assert(() => Assert.AreEqual("Magenic", contact.CompanyName.Text));
+            this.SoftAssert.Assert(() => Assert.AreEqual("Mageniczz", contact.CompanyName.Text));
             this.SoftAssert.Assert(() => Assert.AreEqual("Info: info@magenic.com", contact.EmailContact.Text));
             this.SoftAssert.FailTestIfAssertFailed();
         }
