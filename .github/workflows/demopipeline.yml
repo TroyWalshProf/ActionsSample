@@ -45,7 +45,7 @@ jobs:
         path: artifactTests
 
   deployToLower:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master' &&  github.event_name == 'schedule'
     needs: build
     environment: lower
     runs-on: windows-latest
